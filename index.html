@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000"><link rel="manifest" href="manifest.webmanifest">
+<title>鴻鵠 2.0</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="brand">鴻鵠 <small>2.0</small></div><div class="sub">STUDY MANAGEMENT</div></header>
+<nav id="tabs">
+<button class="active" data-tab="library">参考書</button><button data-tab="timer">タイマー</button><button data-tab="todo">ToDo</button><button data-tab="calendar">カレンダー</button><button data-tab="stats">記録</button>
+</nav>
+<main>
+<section id="library" class="panel active">
+<div class="section-head"><div><div class="eyebrow">LIBRARY</div><h1>参考書ライブラリ</h1><p>書影はISBN等で照合した実物画像のみ表示します。</p></div><button id="addBook" class="outline">＋ 追加</button></div>
+<div class="filters"><input id="search" placeholder="書名・出版社で検索"><select id="subject"><option value="">すべての科目</option><option>数学</option><option>英語</option><option>国語</option><option>物理</option><option>化学</option><option>生物</option><option>地学</option><option>社会</option><option>情報</option></select></div>
+<div id="bookGrid" class="book-grid"></div>
+</section>
+<section id="timer" class="panel"><div class="eyebrow">FOCUS TIMER</div><h1>学習タイマー</h1><div class="timer" id="clock">00:00:00</div><input id="studySubject" placeholder="学習内容（例：数学・二次関数）"><div class="actions"><button id="start">開始</button><button id="pause" class="outline">一時停止</button><button id="finish" class="outline">終了・記録</button></div><p class="muted">開始時刻を保存し、画面を閉じて戻ったときも経過時間を再計算します。</p></section>
+<section id="todo" class="panel"><div class="eyebrow">TASKS</div><h1>ToDo</h1><div class="inline-form"><input id="todoText" placeholder="やること"><input id="todoDate" type="date"><button id="todoAdd">追加</button></div><div id="todoList"></div></section>
+<section id="calendar" class="panel"><div class="eyebrow">CALENDAR</div><h1>学習カレンダー</h1><div class="monthbar"><button id="prevMonth" class="outline">‹</button><strong id="monthLabel"></strong><button id="nextMonth" class="outline">›</button></div><div class="calendar" id="calendarGrid"></div><div id="dayDetails" class="day-details">日付を選択すると予定・完了履歴・学習記録を表示します。</div></section>
+<section id="stats" class="panel"><div class="eyebrow">ANALYTICS</div><h1>学習記録</h1><div id="statsContent"></div><button id="backup" class="outline">データをバックアップ</button><input type="file" id="restoreFile" accept="application/json" hidden><button id="restore" class="outline">バックアップを復元</button></section>
+</main>
+<dialog id="bookDialog"><form method="dialog" id="bookForm"><div class="dialog-head"><h2>参考書を登録</h2><button class="x">×</button></div>
+<label>書名<input name="title" required></label><label>科目<select name="subject"><option>数学</option><option>英語</option><option>国語</option><option>物理</option><option>化学</option><option>生物</option><option>地学</option><option>社会</option><option>情報</option></select></label>
+<label>出版社<input name="publisher"></label><label>版・巻<input name="edition" placeholder="例：六訂版／数学Ⅰ・A"></label><label>ISBN（任意）<input name="isbn"></label>
+<label>電子版の公式書影URL（任意）<input name="cover" type="url" placeholder="出版社・電子書店が公開する画像URL"></label>
+<label>公式商品ページURL（任意）<input name="source" type="url"></label><label>総ページ数<input name="total" type="number" min="0"></label><button type="submit">登録</button></form></dialog>
+<dialog id="detailDialog"><div id="detailBody"></div><button class="outline" id="closeDetail">閉じる</button></dialog>
+<script src="app.js"></script><script>if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script>
+</body></html>
